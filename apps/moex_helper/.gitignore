@@ -1,0 +1,4 @@
+node_modules
+npm-debug.log
+priv/static/*
+!priv/static/robots.txt
