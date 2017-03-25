@@ -2,13 +2,19 @@ defmodule BtceWatcher.Tasks.CheckPrice do
   alias Reporter.{Mailer, Email}
   alias BtceWatcher.Client
 
-  @threshold Application.get_env(:btce_watcher, __MODULE__)[:threshold]
-
   @subject "BTC-E - Price is dropping"
 
   def call do
     price = Client.last_price
-    if price < @threshold, do: send_report()
+    if price < threshold(), do: send_report()
+  end
+
+  defp threshold do
+    :btce_watcher
+    |> Application.app_dir("priv/price_threshold.secret.txt")
+    |> File.read!
+    |> String.trim_trailing
+    |> String.to_integer
   end
 
   defp send_report do

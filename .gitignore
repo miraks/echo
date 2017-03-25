@@ -6,4 +6,5 @@
 **/erl_crash.dump
 *.ez
 **/config/*.secret.*
+**/priv/*.secret.*
 deploy.rb
