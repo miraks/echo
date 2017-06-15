@@ -5,7 +5,7 @@ defmodule MoexHelper.Reports.Ownerships do
   import MoexHelper.I18n, only: [t: 1]
 
   alias Decimal, as: D
-  alias MoexHelper.{Repo, User}
+  alias MoexHelper.{Repo, User, Ownership}
   alias Reporter.Report
   alias Reporter.Report.{Column, Row}
 
@@ -35,6 +35,7 @@ defmodule MoexHelper.Reports.Ownerships do
     user
     |> assoc(:ownerships)
     |> preload([:account, :security])
+    |> Ownership.not_deleted
     |> order_by(asc: :position)
     |> Repo.all
   end
