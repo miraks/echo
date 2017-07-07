@@ -9,7 +9,7 @@ environment :prod do
 end
 
 release :echo do
-  set version: "0.1.2"
+  set version: "0.1.3"
   set applications: [
     btce_watcher: :permanent,
     moex_helper: :permanent,
