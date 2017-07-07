@@ -7,7 +7,12 @@ defmodule MoexHelper.Tasks.SyncSecurities do
   @columns ~W(SECNAME PREVPRICE COUPONVALUE NEXTCOUPON MATDATE)
 
   def call do
-    securities = Security |> preload(board: [market: :engine]) |> Repo.stream
+    query = from s in Security,
+      preload: [board: [market: :engine]],
+      where: is_nil(fragment("to_date(?->>?, 'YYYY-MM-DD')", s.data, "MATDATE")) or
+        fragment("to_date(?->>?, 'YYYY-MM-DD')", s.data, "MATDATE") >= ^Date.utc_today
+
+    securities = Repo.stream(query)
 
     Repo.transaction(fn ->
       Enum.each(securities, &update_data/1)
