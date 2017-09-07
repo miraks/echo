@@ -1,7 +1,7 @@
 defmodule BtceWatcher.Client do
   use HTTPoison.Base
 
-  @base_url "https://btc-e.com/api/2"
+  @base_url "https://btc-e.nz/api/2"
 
   def last_price do
     "/btc_usd/ticker"
