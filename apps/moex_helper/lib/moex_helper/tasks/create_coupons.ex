@@ -16,8 +16,11 @@ defmodule MoexHelper.Tasks.CreateCoupons do
     query = from o in Ownership,
       inner_join: s in assoc(o, :security),
       left_join: c in assoc(o, :coupons),
+      on: c.date >= ^Date.utc_today,
       preload: [security: s],
-      where: is_nil(c.id) and \
+      where:
+        is_nil(o.deleted_at) and \
+        is_nil(c.id) and \
         from_now(^@threshold_value, ^@threshold_unit) > fragment("to_date(?->>?, 'YYYY-MM-DD')", s.data, "NEXTCOUPON")
 
     Repo.all(query)
