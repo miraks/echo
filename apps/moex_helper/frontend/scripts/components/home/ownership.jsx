@@ -66,14 +66,14 @@ class Ownership extends PureComponent {
     const { isFirst, moveUp } = this.props
 
     if (isFirst) return
-    return <Button size="small" color="primary" variant="fab" onClick={moveUp}>🡹</Button>
+    return <Button className="ownership_move-button m-up" size="small" color="primary" variant="fab" onClick={moveUp}>➔</Button>
   }
 
   moveDown() {
     const { isLast, moveDown } = this.props
 
     if (isLast) return
-    return <Button size="small" color="primary" variant="fab" onClick={moveDown}>🡻</Button>
+    return <Button className="ownership_move-button m-down" size="small" color="primary" variant="fab" onClick={moveDown}>➔</Button>
   }
 
   edit() {
@@ -101,18 +101,22 @@ class Ownership extends PureComponent {
   render() {
     const { columns } = this.props
 
-    return <tr>
+    return <tr className="ownership">
       <td>
-        {::this.moveUp()}
-        {::this.moveDown()}
+        <div className="ownership_move-buttons">
+          {::this.moveUp()}
+          {::this.moveDown()}
+        </div>
       </td>
       {columns.map((column) =>
         <td key={column.get('path')}>{::this.column(column)}</td>
       ).toJS()}
       <td>
-        {::this.edit()}
-        {::this.update()}
-        <Button color="danger" onClick={::this.remove}>Remove</Button>
+        <div className="ownership_action-buttons">
+          {::this.edit()}
+          {::this.update()}
+          <Button color="danger" onClick={::this.remove}>Remove</Button>
+        </div>
       </td>
     </tr>
   }

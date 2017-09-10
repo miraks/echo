@@ -39,7 +39,7 @@ class HomePage extends PureComponent {
     const { ownerships } = this.props
     const { columns } = this.state
 
-    return <table>
+    return <table className="ownerships">
       <thead>
         <tr>
           <th/>
