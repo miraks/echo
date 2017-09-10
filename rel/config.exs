@@ -12,6 +12,7 @@ release :echo do
   set version: "0.2.0"
   set applications: [
     btce_watcher: :permanent,
+    cryptoc: :permanent,
     moex_helper: :permanent,
     reporter: :permanent
   ]
