@@ -18,6 +18,7 @@ defmodule Reporter.Mixfile do
 
   def application do
     [
+      mod: {Reporter, []},
       extra_applications: [:logger]
     ]
   end

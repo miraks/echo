@@ -7,7 +7,8 @@ defmodule MoexHelper do
     children = [
       supervisor(MoexHelper.Repo, []),
       supervisor(MoexHelper.Endpoint, []),
-      supervisor(ConCache, [[ttl_check: :timer.minutes(1), ttl: :timer.hours(1)], [name: :iss_cache]])
+      supervisor(ConCache, [[ttl_check: :timer.minutes(1), ttl: :timer.hours(1)], [name: :iss_cache]]),
+      worker(MoexHelper.Scheduler, [])
     ]
 
     opts = [strategy: :one_for_one, name: MoexHelper.Supervisor]

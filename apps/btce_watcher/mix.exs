@@ -18,6 +18,7 @@ defmodule BtceWatcher.Mixfile do
 
   def application do
     [
+      mod: {BtceWatcher, []},
       extra_applications: [:logger]
     ]
   end
