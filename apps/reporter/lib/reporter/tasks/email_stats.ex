@@ -14,6 +14,7 @@ defmodule Reporter.Tasks.EmailStats do
     [
       MoexHelper.Reports.Ownerships.call(@email),
       MoexHelper.Reports.Coupons.call(@email),
+      Cryptoc.Reports.Rates.call
       # BtceWatcher.Reports.Price.call
     ]
   end
