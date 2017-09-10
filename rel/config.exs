@@ -9,7 +9,7 @@ environment :prod do
 end
 
 release :echo do
-  set version: "0.2.0"
+  set version: "0.2.1"
   set applications: [
     btce_watcher: :permanent,
     cryptoc: :permanent,
