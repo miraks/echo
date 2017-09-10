@@ -59,11 +59,11 @@ defmodule MoexHelper.OwnershipAction.Create do
   defp create_ownership(%{security: security}, user, params) do
     {account_id, params} = Map.pop(params, "account_id")
     account = Repo.get_by(assoc(user, :accounts), id: account_id)
-    params = Map.put(params, "account_id", account.id)
+    new_params = Map.put(params, "account_id", account.id)
 
     security
     |> build_assoc(:ownerships)
-    |> Ownership.changeset(params)
+    |> Ownership.changeset(new_params)
     |> Repo.insert
   end
 end

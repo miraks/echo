@@ -1,10 +1,9 @@
 defmodule MoexHelper.Api.Private.SessionController do
   use MoexHelper.Web, :controller
 
-  alias MoexHelper.User
+  alias MoexHelper.{User, ErrorView}
   alias MoexHelper.UserAction.CheckPassword
   alias MoexHelper.Api.Private.CurrentUserView
-  alias MoexHelper.ErrorView
 
   def create(conn, %{"email" => email, "password" => password}) do
     user = Repo.get_by!(User, email: email)

@@ -12,8 +12,8 @@ defmodule Echo.Mixfile do
 
   defp deps do
     [
-      {:distillery, "~> 1.1", runtime: false},
-      {:credo, "~> 0.6.1", only: [:dev, :test], runtime: false}
+      {:distillery, "~> 1.5", runtime: false},
+      {:credo, "~> 0.8.6", only: [:dev, :test], runtime: false}
     ]
   end
 end

@@ -9,7 +9,7 @@ defmodule Reporter.Mixfile do
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "~> 1.4",
+      elixir: "~> 1.5",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps: deps()
@@ -24,10 +24,10 @@ defmodule Reporter.Mixfile do
 
   defp deps do
     [
-      {:swoosh, "~> 0.5.0"},
-      {:gen_smtp, "~> 0.11.0"},
-      {:quantum, "~> 1.8"},
-      {:decimal, "~> 1.3"},
+      {:swoosh, "~> 0.9.1"},
+      {:gen_smtp, "~> 0.12.0"},
+      {:quantum, "~> 2.1"},
+      {:decimal, "~> 1.4"},
       {:timex, "~> 3.1"}
     ]
   end

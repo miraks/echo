@@ -5,7 +5,7 @@ defmodule MoexHelper.Mixfile do
     [
       app: :moex_helper,
       version: "0.1.5",
-      elixir: "~> 1.4",
+      elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix] ++ Mix.compilers,
       build_path: "../../_build",
@@ -22,7 +22,7 @@ defmodule MoexHelper.Mixfile do
   def application do
     [
       mod: {MoexHelper, []},
-      extra_applications: [:logger]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
@@ -31,16 +31,17 @@ defmodule MoexHelper.Mixfile do
 
   defp deps do
     [
-      {:phoenix, "~> 1.2.1"},
-      {:phoenix_ecto, "~> 3.0"},
-      {:postgrex, ">= 0.0.0"},
-      {:cowboy, "~> 1.0"},
-      {:comeonin, "~> 3.0"},
-      {:guardian, "~> 0.14.0"},
-      {:poison, "~> 2.2"},
-      {:httpoison, "~> 0.11.0"},
-      {:con_cache, "~> 0.12.0"},
-      {:quantum, "~> 1.8"}
+      {:phoenix, "~> 1.3"},
+      {:phoenix_ecto, "~> 3.2"},
+      {:postgrex, "~> 0.13.3"},
+      {:cowboy, "~> 1.1"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"},
+      {:guardian, "~> 0.14.5"},
+      {:poison, "~> 3.1"},
+      {:httpoison, "~> 0.13.0"},
+      {:con_cache, "~> 0.12.1"},
+      {:quantum, "~> 2.1"}
     ]
   end
 

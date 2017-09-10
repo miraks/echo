@@ -1,8 +1,7 @@
 defmodule MoexHelper.Api.Private.AccountController do
   use MoexHelper.Web, :controller
 
-  alias MoexHelper.Account
-  alias MoexHelper.ErrorView
+  alias MoexHelper.{Account, ErrorView}
 
   plug Guardian.Plug.EnsureResource, handler: MoexHelper.AuthErrorHandler
 
