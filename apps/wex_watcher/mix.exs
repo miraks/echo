@@ -1,9 +1,9 @@
-defmodule BtceWatcher.Mixfile do
+defmodule WexWatcher.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :btce_watcher,
+      app: :wex_watcher,
       version: "0.2.1",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
@@ -18,7 +18,7 @@ defmodule BtceWatcher.Mixfile do
 
   def application do
     [
-      mod: {BtceWatcher, []},
+      mod: {WexWatcher, []},
       extra_applications: [:logger]
     ]
   end

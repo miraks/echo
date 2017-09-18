@@ -1,13 +1,15 @@
-defmodule BtceWatcher.Client do
+defmodule WexWatcher.Client do
   use HTTPoison.Base
 
-  @base_url "https://btc-e.nz/api/2"
+  @base_url "https://wex.nz/api/3"
 
-  def last_price do
-    "/btc_usd/ticker"
+  def last_price(from, to) do
+    pair = "#{from}_#{to}"
+
+    "/ticker/#{pair}"
     |> get!
     |> Map.get(:body)
-    |> get_in(["ticker", "last"])
+    |> get_in([pair, "last"])
   end
 
   defp process_url(url) do

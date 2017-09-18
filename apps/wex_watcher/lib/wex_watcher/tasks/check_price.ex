@@ -1,16 +1,16 @@
-defmodule BtceWatcher.Tasks.CheckPrice do
+defmodule WexWatcher.Tasks.CheckPrice do
   alias Reporter.{Mailer, Email}
-  alias BtceWatcher.Client
+  alias WexWatcher.Client
 
-  @subject "BTC-E - Price is dropping"
+  @subject "Wex - Price is dropping"
 
   def call do
-    price = Client.last_price
+    price = Client.last_price("btc", "usd")
     if price < threshold(), do: send_report()
   end
 
   defp threshold do
-    :btce_watcher
+    :wex_watcher
     |> Application.app_dir("priv/price_threshold.secret.txt")
     |> File.read!
     |> String.trim_trailing
@@ -18,7 +18,7 @@ defmodule BtceWatcher.Tasks.CheckPrice do
   end
 
   defp send_report do
-    BtceWatcher.Reports.Price.call
+    WexWatcher.Reports.Rates.call
     |> List.wrap
     |> Email.Reports.build(@subject)
     |> Mailer.deliver
