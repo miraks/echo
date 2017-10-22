@@ -3,6 +3,8 @@ defmodule MoexHelper.Security do
 
   schema "securities" do
     field :code, :string
+    field :next_redemption_amount, :decimal
+    field :next_redemption_at, :date
     field :data, :map, default: %{}
     belongs_to :board, MoexHelper.Board
     has_many :ownerships, MoexHelper.Ownership
@@ -12,9 +14,15 @@ defmodule MoexHelper.Security do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:code, :data, :board_id])
+    |> cast(params, [:code, :next_redemption_amount, :next_redemption_at, :data, :board_id])
     |> validate_required([:code, :data, :board_id])
     |> foreign_key_constraint(:board_id)
     |> unique_constraint(:code, name: :securities_board_id_code_index)
+  end
+
+  def not_redeemed do
+    from s in __MODULE__,
+      where: is_nil(fragment("to_date(?->>?, 'YYYY-MM-DD')", s.data, "MATDATE")) or
+        fragment("to_date(?->>?, 'YYYY-MM-DD')", s.data, "MATDATE") >= ^Date.utc_today
   end
 end

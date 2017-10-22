@@ -11,9 +11,17 @@ config :moex_helper, MoexHelper.Scheduler, jobs: [
     schedule: "@hourly",
     task: {MoexHelper.Tasks.SyncSecurities, :call, []}
   ]},
+  {:update_redemption_info, [
+    schedule: "@hourly",
+    task: {MoexHelper.Tasks.UpdateRedemptionInfo, :call, []}
+  ]},
   {:create_coupons, [
     schedule: "10 6 * * *",
     task: {MoexHelper.Tasks.CreateCoupons, :call, []}
+  ]},
+  {:create_redemptions, [
+    schedule: "10 6 * * *",
+    task: {MoexHelper.Tasks.CreateRedemptions, :call, []}
   ]}
 ]
 

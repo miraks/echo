@@ -7,7 +7,8 @@ defmodule MoexHelper.I18n do
           prevprice: "Last deal price",
           couponvalue: "Coupon value",
           nextcoupon: "Next coupon",
-          matdate: "Redemption"
+          matdate: "Maturity",
+          lotsize: "Lot size"
         }
       }
     }

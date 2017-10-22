@@ -13,6 +13,7 @@ import App from './components/app'
 import Home from './components/home/page'
 import Accounts from './components/accounts/index/page'
 import Coupons from './components/coupons/page'
+import Redemptions from './components/redemptions/page'
 import NewSecurity from './components/ownerships/new/page'
 
 const store = createStore(
@@ -37,6 +38,7 @@ ReactDOM.render(
         <IndexRoute component={Home}/>
         <Route path="/accounts" component={Accounts}/>
         <Route path="/coupons" component={Coupons}/>
+        <Route path="/redemptions" component={Redemptions}/>
         <Route path="/ownerships/new" component={NewSecurity}/>
       </Route>
     </Router>

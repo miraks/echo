@@ -20,6 +20,8 @@ defmodule MoexHelper.Reports.Ownerships do
     %Column{id: :prevprice, name: t("en.security.data.prevprice")},
     %Column{id: :couponvalue, name: t("en.security.data.couponvalue")},
     %Column{id: :nextcoupon, name: t("en.security.data.nextcoupon")},
+    %Column{id: :next_redemption_amount, name: "Next redemption amount"},
+    %Column{id: :next_redemption_at, name: "Next redemption"},
     %Column{id: :matdate, name: t("en.security.data.matdate")}
   ]
 
@@ -108,6 +110,16 @@ defmodule MoexHelper.Reports.Ownerships do
 
   defp value(ownership, :nextcoupon) do
     "#{ownership.security.data["NEXTCOUPON"]} (#{days_till_coupon(ownership)})"
+  end
+
+  defp value(ownership, :next_redemption_amount) do
+    ownership.security.next_redemption_amount
+    |> Decimal.to_float
+    |> :erlang.float_to_binary(decimals: 2)
+  end
+
+  defp value(ownership, :next_redemption_at) do
+    Date.to_iso8601(ownership.security.next_redemption_at)
   end
 
   defp value(ownership, :matdate) do

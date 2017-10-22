@@ -24,5 +24,6 @@ defmodule MoexHelper.Router do
     end
     resources "/ownerships", OwnershipController, only: [:index, :create, :update, :delete]
     resources "/coupons", CouponController, only: [:index, :update]
+    resources "/redemptions", RedemptionController, only: [:index, :update]
   end
 end

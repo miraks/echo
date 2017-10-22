@@ -35,9 +35,9 @@ defmodule MoexHelper.Tasks.CreateCoupons do
 
   defp coupon_params(ownership) do
     %{
-      date: ownership.security.data["NEXTCOUPON"],
       name: ownership.security.data["SECNAME"],
-      amount: ownership.amount * ownership.security.data["COUPONVALUE"]
+      amount: ownership.amount * ownership.security.data["COUPONVALUE"] * ownership.security.data["LOTSIZE"],
+      date: ownership.security.data["NEXTCOUPON"]
     }
   end
 end

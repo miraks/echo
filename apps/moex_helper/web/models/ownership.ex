@@ -12,6 +12,7 @@ defmodule MoexHelper.Ownership do
     belongs_to :account, MoexHelper.Account
     belongs_to :security, MoexHelper.Security
     has_many :coupons, MoexHelper.Coupon
+    has_many :redemptions, MoexHelper.Redemption
     many_to_many :changes, MoexHelper.Change, join_through: MoexHelper.OwnershipChange
 
     timestamps()

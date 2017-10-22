@@ -4,6 +4,7 @@ import currentUser from './reducers/current-user'
 import accounts from './reducers/accounts'
 import ownerships from './reducers/ownerships'
 import coupons from './reducers/coupons'
+import redemptions from './reducers/redemptions'
 
 export default {
   routing,
@@ -11,5 +12,6 @@ export default {
   currentUser,
   accounts,
   ownerships,
-  coupons
+  coupons,
+  redemptions
 }

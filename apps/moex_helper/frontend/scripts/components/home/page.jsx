@@ -25,6 +25,8 @@ class HomePage extends PureComponent {
         { name: t('en.security.data.prevprice'), path: 'security.data.prevprice', editable: false },
         { name: t('en.security.data.couponvalue'), path: 'security.data.couponvalue', editable: false },
         { name: t('en.security.data.nextcoupon'), path: 'security.data.nextcoupon', editable: false },
+        { name: 'Next redemption amount', path: 'security.nextRedemptionAmount', editable: false },
+        { name: 'Next redemption', path: 'security.nextRedemptionAt', editable: false },
         { name: t('en.security.data.matdate'), path: 'security.data.matdate', editable: false }
       ])
     }

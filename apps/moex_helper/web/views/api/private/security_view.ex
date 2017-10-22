@@ -5,6 +5,8 @@ defmodule MoexHelper.Api.Private.SecurityView do
     %{
       id: security.id,
       code: security.code,
+      next_redemption_amount: Decimal.to_float(security.next_redemption_amount),
+      next_redemption_at: security.next_redemption_at,
       data: security.data
     }
   end

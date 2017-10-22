@@ -10,6 +10,7 @@ defmodule MoexHelper.User do
     has_many :accounts, MoexHelper.Account
     has_many :ownerships, through: [:accounts, :ownerships]
     has_many :coupons, through: [:ownerships, :coupons]
+    has_many :redemptions, through: [:ownerships, :redemptions]
 
     timestamps()
   end
