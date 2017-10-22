@@ -20,8 +20,8 @@ defmodule MoexHelper.Security do
     |> unique_constraint(:code, name: :securities_board_id_code_index)
   end
 
-  def not_redeemed do
-    from s in __MODULE__,
+  def not_redeemed(query \\ __MODULE__) do
+    from s in query,
       where: is_nil(fragment("to_date(?->>?, 'YYYY-MM-DD')", s.data, "MATDATE")) or
         fragment("to_date(?->>?, 'YYYY-MM-DD')", s.data, "MATDATE") >= ^Date.utc_today
   end
