@@ -70,7 +70,7 @@ defmodule MoexHelper.Reports.Ownerships do
   end
 
   defp color(ownership) do
-    left = days_till_coupon(ownership)
+    left = days_till(ownership.security.data["NEXTCOUPON"])
     cond do
       left in 0..2 -> "red"
       left in 3..5 -> "orange"
@@ -109,7 +109,7 @@ defmodule MoexHelper.Reports.Ownerships do
   end
 
   defp value(ownership, :nextcoupon) do
-    "#{ownership.security.data["NEXTCOUPON"]} (#{days_till_coupon(ownership)})"
+    with_days_till(ownership.security.data["NEXTCOUPON"])
   end
 
   defp value(ownership, :next_redemption_amount) do
@@ -119,15 +119,20 @@ defmodule MoexHelper.Reports.Ownerships do
   end
 
   defp value(ownership, :next_redemption_at) do
-    Date.to_iso8601(ownership.security.next_redemption_at)
+    with_days_till(ownership.security.next_redemption_at)
   end
 
   defp value(ownership, :matdate) do
-    ownership.security.data["MATDATE"]
+    with_days_till(ownership.security.data["MATDATE"])
   end
 
-  defp days_till_coupon(ownership) do
-    ownership.security.data["NEXTCOUPON"] |> Date.from_iso8601! |> Timex.diff(Timex.today, :days)
+  defp days_till(str) when is_binary(str), do: str |> Date.from_iso8601! |> days_till
+  defp days_till(date) do
+    Timex.diff(date, Timex.today, :days)
+  end
+
+  defp with_days_till(date) do
+    "#{date} (#{days_till(date)})"
   end
 
   defp prev_price(ownership) do
