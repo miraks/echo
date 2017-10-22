@@ -22,7 +22,7 @@ defmodule MoexHelper.Mixfile do
   def application do
     [
       mod: {MoexHelper, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :p1_utils]
     ]
   end
 
