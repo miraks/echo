@@ -9,7 +9,7 @@ environment :prod do
 end
 
 release :echo do
-  set version: "0.3.0"
+  set version: "0.4.0"
   set applications: [
     cryptoc: :permanent,
     moex_helper: :permanent,

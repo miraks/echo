@@ -4,7 +4,7 @@ defmodule MoexHelper.Mixfile do
   def project do
     [
       app: :moex_helper,
-      version: "0.3.0",
+      version: "0.4.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix] ++ Mix.compilers,
