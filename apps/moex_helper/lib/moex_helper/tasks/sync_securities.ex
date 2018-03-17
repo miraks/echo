@@ -8,6 +8,8 @@ defmodule MoexHelper.Tasks.SyncSecurities do
 
   def call do
     query = from s in Security.not_redeemed,
+      inner_join: o in assoc(s, :ownerships), on: is_nil(o.deleted_at),
+      distinct: s.id,
       preload: [board: [market: :engine]]
 
     securities = Repo.stream(query)

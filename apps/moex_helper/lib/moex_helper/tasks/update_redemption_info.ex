@@ -6,6 +6,8 @@ defmodule MoexHelper.Tasks.UpdateRedemptionInfo do
 
   def call do
     query = from s in Security.not_redeemed,
+      inner_join: o in assoc(s, :ownerships), on: is_nil(o.deleted_at),
+      distinct: s.id,
       where: is_nil(s.next_redemption_at) or s.next_redemption_at < ^Date.utc_today
 
     securities = Repo.stream(query)
