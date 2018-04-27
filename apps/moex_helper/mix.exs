@@ -41,7 +41,7 @@ defmodule MoexHelper.Mixfile do
       {:poison, "~> 3.1"},
       {:httpoison, "~> 0.13.0"},
       {:con_cache, "~> 0.12.1"},
-      {:quantum, "~> 2.1"},
+      {:quantum, "~> 2.2"},
       {:floki, "~> 0.18.1"},
       {:iconv, "~> 1.0"}
     ]
