@@ -22,6 +22,7 @@ export default class Coupon extends PureComponent {
     const { coupon } = this.props
 
     return <tr>
+      <td>{coupon.getIn(['account', 'name'])}</td>
       <td>{coupon.get('name')}</td>
       <td>{coupon.get('amount')}</td>
       <td>{coupon.get('date')} ({daysLeft(coupon.get('date'))})</td>

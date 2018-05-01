@@ -27,6 +27,7 @@ class CouponsPage extends PureComponent {
     return <table>
       <thead>
         <tr>
+          <th>Account</th>
           <th>Name</th>
           <th>Amount</th>
           <th>Days left</th>

@@ -7,6 +7,7 @@ defmodule MoexHelper.Coupon do
     field :amount, :decimal
     field :collected, :boolean, default: false
     belongs_to :ownership, MoexHelper.Ownership
+    has_one :account, through: [:ownership, :account]
 
     timestamps()
   end

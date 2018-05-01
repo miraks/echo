@@ -10,6 +10,7 @@ defmodule MoexHelper.Reports.Coupons do
   @title "MOEX - Coupons"
 
   @columns [
+    %Column{id: :account, name: "Account"},
     %Column{id: :name, name: "Name"},
     %Column{id: :amount, name: "Amount"},
     %Column{id: :days_past, name: "Days past"},
@@ -27,6 +28,7 @@ defmodule MoexHelper.Reports.Coupons do
       inner_join: o in assoc(c, :ownership),
       inner_join: a in assoc(o, :account),
       inner_join: u in assoc(a, :user),
+      preload: [account: a],
       where: u.id == ^user.id and not c.collected and c.date <= ^Date.utc_today,
       order_by: c.date
 
@@ -40,6 +42,10 @@ defmodule MoexHelper.Reports.Coupons do
     end)
 
     %Report{title: @title, columns: @columns, rows: rows}
+  end
+
+  defp value(coupon, :account) do
+    coupon.account.name
   end
 
   defp value(coupon, :name) do

@@ -6,7 +6,7 @@ defmodule MoexHelper.Api.Private.CouponController do
   plug Guardian.Plug.EnsureResource, handler: MoexHelper.AuthErrorHandler
 
   def index(conn, _params) do
-    coupons = conn |> current_resource |> assoc(:coupons) |> Repo.all
+    coupons = conn |> current_resource |> assoc(:coupons) |> preload(:account) |> Repo.all
     render(conn, "index.json", coupons: coupons)
   end
 
