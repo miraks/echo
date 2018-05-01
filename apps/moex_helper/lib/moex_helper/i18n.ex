@@ -10,6 +10,10 @@ defmodule MoexHelper.I18n do
           matdate: "Maturity",
           lotsize: "Lot size"
         }
+      },
+      currency_sign: %{
+        SUR: "₽",
+        USD: "$"
       }
     }
   }

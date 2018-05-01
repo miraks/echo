@@ -35,4 +35,10 @@ defmodule MoexHelper.Ownership do
   defp save_changes(changeset) do
     put_assoc(changeset, :changes, [%{data: changeset.changes} | changeset.data.changes])
   end
+
+  def total_value(ownership) do
+    security = ownership.security
+    value = (security.data["FACEVALUE"] * security.data["PREVPRICE"] / 100 + security.data["ACCRUEDINT"]) * security.data["LOTSIZE"] * ownership.amount
+    Float.round(value, 2)
+  end
 end

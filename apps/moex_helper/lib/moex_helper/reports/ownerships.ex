@@ -22,7 +22,8 @@ defmodule MoexHelper.Reports.Ownerships do
     %Column{id: :nextcoupon, name: t("en.security.data.nextcoupon")},
     %Column{id: :next_redemption_amount, name: "Next redemption amount"},
     %Column{id: :next_redemption_at, name: "Next redemption"},
-    %Column{id: :matdate, name: t("en.security.data.matdate")}
+    %Column{id: :matdate, name: t("en.security.data.matdate")},
+    %Column{id: :total_value, name: "Total value"}
   ]
 
   def call(email) do
@@ -64,9 +65,23 @@ defmodule MoexHelper.Reports.Ownerships do
     rows = Enum.map(ownerships, fn ownership ->
       data = Enum.map(@columns, &value(ownership, &1.id))
       %Row{data: data, color: color(ownership)}
-    end)
+    end) ++ [footer(ownerships)]
 
     %Report{title: @title, columns: @columns, rows: rows}
+  end
+
+  defp footer(ownerships) do
+    total_values = ownerships
+    |> Enum.reduce(%{}, fn ownership, sums ->
+      currency = ownership.security.data["FACEUNIT"]
+      total_value = Ownership.total_value(ownership)
+      Map.update(sums, currency, total_value, fn sum -> sum + total_value end)
+    end)
+    |> Enum.map(fn {currency, sum} -> "#{Float.round(sum, 2)} #{t("en.currency_sign.#{currency}")}" end)
+    |> Enum.join(", ")
+
+    data = Enum.map(@columns, fn column -> if column.id == :total_value, do: total_values end)
+    %Row{data: data}
   end
 
   defp color(ownership) do
@@ -101,7 +116,7 @@ defmodule MoexHelper.Reports.Ownerships do
   defp value(ownership, :prevprice) do
     diff = (prev_price(ownership) - D.to_float(ownership.price)) |> Float.round(2)
     diff_with_sign = if diff > 0, do: "+#{diff}", else: diff
-    "#{ownership.security.data["PREVPRICE"]} (#{diff_with_sign})"
+    "#{prev_price(ownership)} (#{diff_with_sign})"
   end
 
   defp value(ownership, :couponvalue) do
@@ -124,6 +139,10 @@ defmodule MoexHelper.Reports.Ownerships do
 
   defp value(ownership, :matdate) do
     with_days_till(ownership.security.data["MATDATE"])
+  end
+
+  defp value(ownership, :total_value) do
+    Ownership.total_value(ownership)
   end
 
   defp days_till(str) when is_binary(str), do: str |> Date.from_iso8601! |> days_till

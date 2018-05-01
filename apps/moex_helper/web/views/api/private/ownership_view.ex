@@ -1,6 +1,7 @@
 defmodule MoexHelper.Api.Private.OwnershipView do
   use MoexHelper.Web, :view
 
+  alias MoexHelper.Ownership
   alias MoexHelper.Api.Private.{AccountView, SecurityView}
 
   def render("index.json", %{ownerships: ownerships}) do
@@ -21,7 +22,8 @@ defmodule MoexHelper.Api.Private.OwnershipView do
       amount: ownership.amount,
       price: ownership.price,
       comment: ownership.comment,
-      position: ownership.position
+      position: ownership.position,
+      total_value: Ownership.total_value(ownership)
     }
   end
 

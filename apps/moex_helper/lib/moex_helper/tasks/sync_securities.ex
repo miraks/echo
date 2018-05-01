@@ -4,7 +4,7 @@ defmodule MoexHelper.Tasks.SyncSecurities do
   alias MoexHelper.{Repo, Security}
   alias MoexHelper.ISS.Client
 
-  @columns ~W(SECNAME LOTSIZE PREVPRICE COUPONVALUE NEXTCOUPON MATDATE)
+  @columns ~W(SECNAME LOTSIZE FACEVALUE FACEUNIT PREVPRICE ACCRUEDINT COUPONVALUE NEXTCOUPON MATDATE)
 
   def call do
     query = from s in Security.not_redeemed,
