@@ -1,7 +1,7 @@
 defmodule MoexHelper.ISS.Client do
   use HTTPoison.Base
 
-  @base_url "http://www.micex.ru/iss"
+  @base_url "https://iss.moex.com/iss"
 
   def search(query, columns) do
     cache_key = {:search, query, columns}
